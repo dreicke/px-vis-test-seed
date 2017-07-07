@@ -1,0 +1,157 @@
+
+<!--
+IMPORT LIST
+-->
+
+<link rel="import" href="../polymer/polymer.html"/>
+<link rel="import" href="css/px-vis-test-seed-styles.html">
+<link rel="import" href="../px-vis/px-vis-scale.html"/>
+<link rel="import" href="../px-vis/px-vis-svg.html"/>
+<link rel="import" href="../px-vis/px-vis-line-svg.html"/>
+<link rel="import" href="../iron-resizable-behavior/iron-resizable-behavior.html" />
+<link rel="import" href="../px-vis/px-vis-behavior-chart.html" />
+<link rel="import" href="../px-vis/px-vis-behavior-d3.html" />
+<link rel="import" href="../px-vis/px-vis-behavior-common.html" />
+<link rel="import" href="../px-colors-design/colors.html"/>
+
+<!--
+THE BUILDING BLOCKS OF YOUR CHART
+-->
+
+<dom-module id="px-vis-test-seed">
+  <template>
+
+      <style include="px-vis-test-seed-styles"></style>
+      <px-vis-svg
+    	  width="[[width]]"
+    	  height="[[height]]"
+    	  margin="[[margin]]"
+    	  svg="{{svg}}">
+    	</px-vis-svg>
+    	<px-vis-scale
+  	    x-axis-type="time"
+  	    y-axis-type="linear"
+  	    complete-series-config="[[completeSeriesConfig]]"
+  	    data-extents="{{dataExtents}}"
+  	    width="[[width]]"
+  	    height="[[height]]"
+  	    margin="[[margin]]"
+  	    chart-data={{chartData}}
+  	    x="{{x}}"
+  	    y="{{y}}"
+  	    domain-changed="{{domainChanged}}"
+  	    selected-domain="[[selectedDomain]]">
+    	</px-vis-scale>
+    	<px-vis-line-svg
+  	    svg="[[svg]]"
+  	    series-id="mySeries"
+  	    complete-series-config="[[completeSeriesConfig]]"
+  	    chart-data="[[chartData]]"
+  	    x="[[x]]"
+  	    y="[[y]]"
+  	    domain-changed="[[domainChanged]]">
+    	</px-vis-line-svg>
+
+  </template>
+</dom-module>
+
+<!--
+YOUR POLYMER SCRIPT
+-->
+
+<script>
+
+Polymer({
+
+    is: 'px-vis-test-seed', 
+
+    // behaviors: [
+    //   PxVisBehaviorChart.layers,
+    // ],
+
+    // YOUR CHART'S PROPERTIES - many can also be set in demo/index.html
+
+    properties: {
+
+      width: {
+          type: Number,
+          value: 300
+      },
+
+      height: {
+          type: Number,
+          value: 150
+      },
+      margin: {
+          type: Object,
+          value: {
+            "left":10,
+            "right":10,
+            "top":10,
+            "bottom":10
+          }
+      },
+
+      chartData:{
+        type : Array,
+        value : [{
+            'x': 1397102460000,
+            'y': 0.56
+          },{
+            'x': 1397139660000,
+            'y': 0.4
+          },{
+            'x': 1397177400000,
+            'y': 0.43
+          },{
+            'x': 1397228040000,
+            'y': 0.33
+          },{
+            'x': 1397248260000,
+            'y': 0.47
+          }]
+      },
+
+      domainChanged:{
+          type: Boolean,
+          value: false
+      },
+
+      completeSeriesConfig:{
+        type: Object,
+        value: function(){
+            return {
+            'mySeries': {
+              "name":"My-Series",
+              "type": "line",
+              "x": 'x',
+              "y": 'y',
+              'color': 'rgb(123,123,1)'
+            }
+          }
+        }
+      },
+
+      dataExtents:{
+        type : Object,
+          value: {
+            "x": [Infinity,-Infinity],
+            "y": [0,-Infinity]
+          }
+      }
+    },
+
+// PUT FUNCTIONS HERE
+
+    // ready: function() {
+    //     this.set('numberOfLayers',2);
+    // },
+
+    // _calcMousePos: function(evt) {
+    //   this.set('mousePosition',[evt.pageX,evt.pageY]);
+    // },
+
+
+})
+
+</script>
