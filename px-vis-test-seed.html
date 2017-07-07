@@ -20,14 +20,19 @@ THE BUILDING BLOCKS OF YOUR CHART
 
 <dom-module id="px-vis-test-seed">
   <template>
-
       <style include="px-vis-test-seed-styles"></style>
+
+      <!-- Establishes your 'drawing surface' -->
+
       <px-vis-svg
     	  width="[[width]]"
     	  height="[[height]]"
     	  margin="[[margin]]"
     	  svg="{{svg}}">
     	</px-vis-svg>
+
+      <!-- Does the math to convert your data to pixels -->
+
     	<px-vis-scale
   	    x-axis-type="time"
   	    y-axis-type="linear"
@@ -42,6 +47,9 @@ THE BUILDING BLOCKS OF YOUR CHART
   	    domain-changed="{{domainChanged}}"
   	    selected-domain="[[selectedDomain]]">
     	</px-vis-scale>
+
+      <!-- Makes the line appear -->
+
     	<px-vis-line-svg
   	    svg="[[svg]]"
   	    series-id="mySeries"
@@ -64,6 +72,8 @@ YOUR POLYMER SCRIPT
 Polymer({
 
     is: 'px-vis-test-seed', 
+
+    // YOUR ARRAY OF BEHAVIORS GOES HERE.
 
     // behaviors: [
     //   PxVisBehaviorChart.layers,
@@ -141,7 +151,7 @@ Polymer({
       }
     },
 
-// PUT FUNCTIONS HERE
+    // PUT FUNCTIONS HERE
 
     // ready: function() {
     //     this.set('numberOfLayers',2);
